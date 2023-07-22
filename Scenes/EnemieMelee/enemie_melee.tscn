@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgo4bqx1mk3hm"]
+
+[ext_resource type="Script" path="res://Scenes/EnemieMelee/EnemieMelee.gd" id="1_bvmv4"]
+[ext_resource type="Texture2D" uid="uid://c32bk2e2dhjdo" path="res://sprites/NGJqSZOpX3do.png" id="2_qgotq"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uhcid"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kwvqo"]
+radius = 0.785306
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vqlfr"]
+height = 2.76052
+radius = 12.9119
+
+[node name="EnemieMelee" type="CharacterBody3D" groups=["enemie"]]
+script = ExtResource("1_bvmv4")
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.999731, 0)
+shape = SubResource("CylinderShape3D_uhcid")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AttackArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00006, 0)
+shape = SubResource("CylinderShape3D_kwvqo")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.185, 0, 0, 0, 0.185, 0, 0, 0, 0.185, 0, 1.01899, 0)
+billboard = 2
+texture = ExtResource("2_qgotq")
+
+[node name="AgrArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AgrArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.962006, 0)
+shape = SubResource("CylinderShape3D_vqlfr")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="AgrArea" to="." method="_on_agr_area_body_entered"]

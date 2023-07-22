@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj26sacnhty4r"]
+
+[ext_resource type="Script" path="res://addons/devblocks/blocks/basic_block.gd" id="1_aiicv"]
+[ext_resource type="Material" uid="uid://bovtf6na6r6ow" path="res://addons/devblocks/blocks/block_material.tres" id="2_t24cm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hwyfo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gblw7"]
+
+[node name="BasicBlock" type="StaticBody3D"]
+script = ExtResource("1_aiicv")
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_hwyfo")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_gblw7")
+surface_material_override/0 = ExtResource("2_t24cm")

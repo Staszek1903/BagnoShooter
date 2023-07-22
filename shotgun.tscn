@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxly4f7s270ho"]
+
+[ext_resource type="Script" path="res://Weapon.gd" id="1_debjc"]
+[ext_resource type="Texture2D" uid="uid://c1u47jsdw2uj" path="res://sprites/NicePng_shotgun-png_298654.png" id="2_agx07"]
+
+[sub_resource type="Animation" id="Animation_535nj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3d/Gun/Sprite3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b8gr8"]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0), Vector3(0, -1.5708, -0.225147), Vector3(0, -1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pp0as"]
+_data = {
+"RESET": SubResource("Animation_535nj"),
+"shoot": SubResource("Animation_b8gr8")
+}
+
+[node name="Shotgun" type="Node3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+script = ExtResource("1_debjc")
+MAGAZINE_SIZE = 5
+ammo = 20
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-3.61999e-06, 0, -1, 0, 1, 0, 1, 0, -3.61999e-06, 0.13, -0.08, -0.206)
+flip_h = true
+pixel_size = 0.0001
+no_depth_test = true
+texture = ExtResource("2_agx07")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pp0as")
+}
+
+[node name="RayCast3d" type="RayCast3D" parent="."]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0, 0, 0)
+target_position = Vector3(60, 0, 0)
